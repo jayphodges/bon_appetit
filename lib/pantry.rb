@@ -48,16 +48,6 @@ class Pantry
     end
   end
 
-  def check_cookbook
-    @cookbook.find_all do |recipe|
-      recipe.ingredients.each_pair do |key, value|
-        if stock_check(key) < value
-          break
-        end
-      end
-    end
-  end
-
   def how_many_can_i_make
     recipes = Hash.new
     check_cookbook.each do |recipe|
@@ -70,7 +60,17 @@ class Pantry
     return recipes
   end
 
+  private
 
+  def check_cookbook
+    @cookbook.find_all do |recipe|
+      recipe.ingredients.each_pair do |key, value|
+        if stock_check(key) < value
+          break
+        end
+      end
+    end
+  end
 
 end
 
@@ -81,25 +81,25 @@ end
 # pantry = Pantry.new
 # binding.pry
 #=====================================
-r1 = Recipe.new("Cheese Pizza")
-r1.add_ingredient("Cheese", 20)
-r1.add_ingredient("Flour", 20)
-
-r2 = Recipe.new("Brine Shot")
-r2.add_ingredient("Brine", 10)
-
-r3 = Recipe.new("Peanuts")
-r3.add_ingredient("Raw nuts", 10)
-r3.add_ingredient("Salt", 10)
-pantry = Pantry.new
-pantry.add_to_cookbook(r1)
-pantry.add_to_cookbook(r2)
-pantry.add_to_cookbook(r3)
+# r1 = Recipe.new("Cheese Pizza")
+# r1.add_ingredient("Cheese", 20)
+# r1.add_ingredient("Flour", 20)
 #
-pantry.restock("Cheese", 10)
-pantry.restock("Flour", 20)
-pantry.restock("Brine", 40)
-pantry.restock("Raw nuts", 20)
-pantry.restock("Salt", 20)
-# pantry.how_many_can_i_make
-binding.pry
+# r2 = Recipe.new("Brine Shot")
+# r2.add_ingredient("Brine", 10)
+#
+# r3 = Recipe.new("Peanuts")
+# r3.add_ingredient("Raw nuts", 10)
+# r3.add_ingredient("Salt", 10)
+# pantry = Pantry.new
+# pantry.add_to_cookbook(r1)
+# pantry.add_to_cookbook(r2)
+# pantry.add_to_cookbook(r3)
+# #
+# pantry.restock("Cheese", 10)
+# pantry.restock("Flour", 20)
+# pantry.restock("Brine", 40)
+# pantry.restock("Raw nuts", 20)
+# pantry.restock("Salt", 20)
+# # pantry.how_many_can_i_make
+# binding.pry

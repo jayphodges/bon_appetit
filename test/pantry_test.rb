@@ -51,13 +51,29 @@ class PantryTest < Minitest::Test
     @pantry.add_to_cookbook(recipe2)
     fill_pantry
     actual = @pantry.what_can_i_make
-    expected = "somehash"
-    binding.pry
+    expected = ["Brine Shot"]
+    assert_equal expected, actual
+  end
+
+  def test_how_many_can_i_make_with_multiple_recipes
+    @pantry.add_to_cookbook(recipe1)
+    @pantry.add_to_cookbook(recipe2)
+    @pantry.add_to_cookbook(recipe3)
+    fill_pantry
+    actual = @pantry.what_can_i_make
+    expected = ["Brine Shot", "Peanuts"]
     assert_equal expected, actual
   end
 
   def test_how_many_can_i_make
-
+    @pantry.add_to_cookbook(recipe1)
+    @pantry.add_to_cookbook(recipe2)
+    @pantry.add_to_cookbook(recipe3)
+    fill_pantry
+    # binding.pry
+    actual = @pantry.how_many_can_i_make
+    expected = ({:"Brine Shot"=>4, :Peanuts=>2})
+    assert_equal expected, actual
   end
 
   def recipe1
@@ -73,12 +89,12 @@ class PantryTest < Minitest::Test
     r2
   end
   #
-  # def recipe3
-  #   r3 = Recipe.new("Peanuts")
-  #   r3.add_ingredient("Raw nuts", 10)
-  #   r3.add_ingredient("Salt", 10)
-  #   r3
-  # end
+  def recipe3
+    r3 = Recipe.new("Peanuts")
+    r3.add_ingredient("Raw nuts", 10)
+    r3.add_ingredient("Salt", 10)
+    r3
+  end
   #
   #
   def fill_pantry
