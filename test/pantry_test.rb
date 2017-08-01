@@ -42,4 +42,26 @@ class PantryTest < Minitest::Test
     assert_equal uni_units, uni
   end
 
+  def test_adding_to_cookbook
+    pantry = Pantry.new
+    pantry.add_to_cookbook("recipe")
+    assert_equal "recipe", pantry.cookbook
+  end
+
+  def test_what_can_i_make
+
+  end
+
+  def test_how_many_can_i_make
+
+  end
+
+  def recipe
+    r = Recipe.new("Spicy Cheese Pizza")
+    r.add_ingredient("Cayenne Pepper", 0.025)
+    r.add_ingredient("Cheese", 75)
+    r.add_ingredient("Flour", 500)
+    r
+  end
+
 end
