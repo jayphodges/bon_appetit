@@ -1,6 +1,10 @@
 require './lib/pantry'
+require './lib/recipe'
+require 'pry'
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'mocha'
+
 
 class PantryTest < Minitest::Test
 
@@ -27,17 +31,15 @@ class PantryTest < Minitest::Test
 
   def test_converting_units
     pantry = Pantry.new
-    centi = pantry.convert_units({:Cheese => 500})
-    milli = pantry.convert_units({:Pepper => 0.05})
-    uni = pantry.convert_units({:Meat => 65})
-    centi_units = {:Cheese=>{:quantity=>5, :units=>"Centi-Units"}}
-    milli_units = {:Pepper=>{:quantity=>50, :units=>"Milli-Units"}}
-    uni_units = {:Meat=>{:quantity=>65, :units=>"Universal Units"}}
+    centi = pantry.converter(500)
+    milli = pantry.converter(0.05)
+    uni = pantry.converter(65)
+    centi_units = {:quantity=>5, :units=>"Centi-Units"}
+    milli_units = {:quantity=>50, :units=>"Milli-Units"}
+    uni_units = {:quantity=>65, :units=>"Universal Units"}
     assert_equal centi_units, centi
     assert_equal milli_units, milli
     assert_equal uni_units, uni
-
   end
-
 
 end

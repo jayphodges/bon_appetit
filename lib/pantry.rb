@@ -1,5 +1,5 @@
 require 'pry'
-
+require './lib/recipe'
 class Pantry
 
   attr_reader :stock
@@ -24,8 +24,6 @@ class Pantry
     result
   end
 
-  private
-
   def converter(unit)
     if unit < 1
       {quantity: (unit * 1000).to_i,
@@ -39,3 +37,9 @@ class Pantry
   end
 
 end
+
+# r = Recipe.new("Spicy Cheese Pizza")
+# r.add_ingredient("Cayenne Pepper", 0.025)
+# binding.pry
+# r.add_ingredient("Cheese", 75)
+# r.add_ingredient("Flour", 500)
