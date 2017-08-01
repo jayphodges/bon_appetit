@@ -30,6 +30,14 @@ class PantryTest < Minitest::Test
     assert_equal 20, @pantry.stock_check("Cheese")
   end
 
+  def test_convert_units
+    actual = @pantry.convert_units(recipe1)
+    expected = ({"Cheese"=>{:quantity=>20, :units=>"Universal Units"},
+                 "Flour"=>{:quantity=>20, :units=>"Universal Units"}
+                })
+    assert_equal actual, expected
+  end
+
   def test_converting_units
     centi = @pantry.converter(500)
     milli = @pantry.converter(0.05)
@@ -70,7 +78,6 @@ class PantryTest < Minitest::Test
     @pantry.add_to_cookbook(recipe2)
     @pantry.add_to_cookbook(recipe3)
     fill_pantry
-    # binding.pry
     actual = @pantry.how_many_can_i_make
     expected = ({:"Brine Shot"=>4, :Peanuts=>2})
     assert_equal expected, actual
@@ -82,21 +89,20 @@ class PantryTest < Minitest::Test
     r1.add_ingredient("Flour", 20)
     r1
   end
-  #
+
   def recipe2
     r2 = Recipe.new("Brine Shot")
     r2.add_ingredient("Brine", 10)
     r2
   end
-  #
+
   def recipe3
     r3 = Recipe.new("Peanuts")
     r3.add_ingredient("Raw nuts", 10)
     r3.add_ingredient("Salt", 10)
     r3
   end
-  #
-  #
+
   def fill_pantry
     @pantry.restock("Cheese", 10)
     @pantry.restock("Flour", 20)
@@ -104,9 +110,5 @@ class PantryTest < Minitest::Test
     @pantry.restock("Raw nuts", 20)
     @pantry.restock("Salt", 20)
   end
-  #
-  # def fill_cookbook
-  #
-  # end
 
 end

@@ -1,5 +1,4 @@
 require 'pry'
-require './lib/recipe'
 class Pantry
 
   attr_reader :stock,
@@ -55,7 +54,7 @@ class Pantry
       recipe.ingredients.each_pair do |key, value|
         results << (stock_check(key) / value)
       end
-      recipes[recipe.name.to_sym] = results.min.round
+      recipes[recipe.name.to_sym] = results.min.to_i
     end
     return recipes
   end
@@ -73,33 +72,3 @@ class Pantry
   end
 
 end
-
-# r = Recipe.new("Spicy Cheese Pizza")
-# r.add_ingredient("Cayenne Pepper", 0.025)
-# r.add_ingredient("Cheese", 75)
-# r.add_ingredient("Flour", 500)
-# pantry = Pantry.new
-# binding.pry
-#=====================================
-# r1 = Recipe.new("Cheese Pizza")
-# r1.add_ingredient("Cheese", 20)
-# r1.add_ingredient("Flour", 20)
-#
-# r2 = Recipe.new("Brine Shot")
-# r2.add_ingredient("Brine", 10)
-#
-# r3 = Recipe.new("Peanuts")
-# r3.add_ingredient("Raw nuts", 10)
-# r3.add_ingredient("Salt", 10)
-# pantry = Pantry.new
-# pantry.add_to_cookbook(r1)
-# pantry.add_to_cookbook(r2)
-# pantry.add_to_cookbook(r3)
-# #
-# pantry.restock("Cheese", 10)
-# pantry.restock("Flour", 20)
-# pantry.restock("Brine", 40)
-# pantry.restock("Raw nuts", 20)
-# pantry.restock("Salt", 20)
-# # pantry.how_many_can_i_make
-# binding.pry
