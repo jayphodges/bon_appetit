@@ -1,3 +1,4 @@
+require 'pry'
 class Pantry
 
   attr_reader :stock
@@ -6,11 +7,12 @@ class Pantry
     @stock = Hash.new(0)
   end
 
-  def restock(item)
-
+  def restock(item, quantity)
+    @stock[item.to_s] += quantity
   end
 
-  def stock_check
-
+  def stock_check(item)
+    @stock[item.to_s]
   end
+  
 end
